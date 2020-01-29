@@ -1,0 +1,8 @@
+logging:
+  level:
+    ROOT: WARN
+    net.optile: INFO
+
+spring:
+  profiles:
+    active: prod

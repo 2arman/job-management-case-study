@@ -1,0 +1,9 @@
+logging:
+  level:
+    ROOT: DEBUG
+    net.optile: DEBUG
+
+spring:
+  profiles:
+  active: dev
+
