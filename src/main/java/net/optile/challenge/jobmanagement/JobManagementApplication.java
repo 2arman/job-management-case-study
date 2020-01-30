@@ -43,6 +43,7 @@ public class JobManagementApplication {
 						"Application '{}' is running! \t\n Access URLs:\n\t" +
 						"Local: \t\t{}://localhost:{}{}\n\t" +
 						"External: \t{}://{}:{}{}\n\t" +
+						"swagger: \t\t{}://localhost:{}{}swagger-ui.html\n\t" +
 						"Profile(s): \t{}\n----------------------------------------------------------",
 				env.getProperty("spring.application.name"),
 				protocol,
@@ -50,6 +51,9 @@ public class JobManagementApplication {
 				contextPath,
 				protocol,
 				hostAddress,
+				serverPort,
+				contextPath,
+				protocol,
 				serverPort,
 				contextPath,
 				env.getActiveProfiles());

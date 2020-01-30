@@ -10,15 +10,16 @@ import java.util.List;
 /**
  * @author Arman
  * Date: 1/29/20
- * Time: 8:24 AM
+ * Time: 8:06 AM
  **/
 @ApiModel
 @Data
 @Builder
-public final class JobType {
-    @ApiModelProperty(value = "job type name",position = 0)
-    private final String name;
+public final class JobReportResponse {
 
-    @ApiModelProperty(value = "job type required parameter",position = 1)
-    private final List<String> requiredParameter;
+    @ApiModelProperty("total Number of job")
+    private final long totalJob;
+
+    @ApiModelProperty("list of job ordered by creation date descending")
+    private final List<JobDto> jobs;
 }

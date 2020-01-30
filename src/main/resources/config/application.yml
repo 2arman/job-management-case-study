@@ -25,6 +25,7 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    generate-ddl: true
   messages:
     basename: i18n/messages
   main:
@@ -32,6 +33,9 @@ spring:
     web-application-type: servlet
   jackson:
     default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Tehran
+#      Europe/Berlin
   mvc:
     favicon:
       enabled: false

@@ -16,12 +16,10 @@ import java.util.Collections;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    public static String AUTHORIZATION_HEADER = "Authorization";
-
-    @Bean(name = "swaggerSpringfoxApiDocket")
+    @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select().paths(PathSelectors.ant("/api/**"))
+                .select()//.paths(PathSelectors.ant("/api/**"))
                 .apis(RequestHandlerSelectors.basePackage("net.optile"))
                 .build()
                 .useDefaultResponseMessages(false)
