@@ -4,7 +4,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
+import org.checkerframework.checker.regex.qual.Regex;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -18,6 +21,7 @@ import java.util.Map;
 @Builder
 public final class JobDto {
     @ApiModelProperty("job Id")
+    @Pattern(regexp = "\\d+")
     private final String jobId;
 
     @ApiModelProperty(value = "job status", position = 1)

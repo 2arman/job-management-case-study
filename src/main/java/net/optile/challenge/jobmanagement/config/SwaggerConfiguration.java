@@ -24,11 +24,11 @@ public class SwaggerConfiguration {
                 .build()
                 .useDefaultResponseMessages(false)
                 .apiInfo(new ApiInfo(
-                        "Job Management Optile Case Study",
+                        "Job Management - the Optile Case Study",
                         "API Documentation for Job Management Services .",
                         "0.0.1",
                         null,
-                        new Contact("Arman Ajabkhani", "http://www.linkedin.com/in/arman-ajabkhani", "arm.khani@gmail.com"),
+                        new Contact("Arman Ajabkhani", null, "arm.khani@gmail.com"),
                         null,
                         null,
                         Collections.emptyList()));

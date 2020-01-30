@@ -1,13 +1,12 @@
 package net.optile.challenge.jobmanagement.domain;
 
-import io.swagger.annotations.ApiModelProperty;
-import net.optile.challenge.jobmanagement.service.dto.JobExecutionTypeDto;
-import net.optile.challenge.jobmanagement.service.dto.JobStatus;
+
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author Arman
@@ -16,24 +15,49 @@ import java.util.Map;
  **/
 @Entity
 @Table(name = "JOB")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Job implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    private final JobStatus jobStatus;
-//
-//    @ApiModelProperty(value = "job status", position = 2)
-//    private final String jobType;
-//
-//    @ApiModelProperty(value = "job status", position = 3)
-//    private final Integer priority;
-//
-//    @ApiModelProperty(value = "job execution method", position = 4)
-//    private final JobExecutionTypeDto jobExecutionType;
-//
-//    @ApiModelProperty(value = "job parameter", position = 5)
-//    private final Map<String,String> parameters;
-//
-//    @ApiModelProperty(value = "job created date", position = 6)
-//    private final LocalDateTime createdDate;
+    @Column
+    private JobStatus jobStatus;
+
+    @Column
+    private String jobType;
+
+    @Column
+    private Integer priority;
+
+    @Column
+    private ExecutionMethod executionMethod;
+
+    @Column
+    private LocalDateTime executionTime;
+
+    @Column
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<JobParameter> parameters;
+
+    @Column
+    private LocalDateTime createdDate;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Job{");
+        sb.append("id=").append(id);
+        sb.append(", jobStatus=").append(jobStatus);
+        sb.append(", jobType='").append(jobType).append('\'');
+        sb.append(", priority=").append(priority);
+        sb.append(", executionMethod=").append(executionMethod);
+        sb.append(", executionTime=").append(executionTime);
+        sb.append(", createdDate=").append(createdDate);
+        sb.append('}');
+        return sb.toString();
+    }
+}
