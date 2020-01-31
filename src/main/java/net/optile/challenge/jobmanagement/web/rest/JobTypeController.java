@@ -29,6 +29,6 @@ public class JobTypeController {
             @ApiResponse(code = 500, message = "Internal server error."),
     })
     public ResponseEntity<List<JobType>> getJobTypes() {
-        return ResponseEntity.ok(jobTypeService.getAll());
+        return ResponseEntity.ok(jobTypeService.getAllJobTypes());
     }
 }

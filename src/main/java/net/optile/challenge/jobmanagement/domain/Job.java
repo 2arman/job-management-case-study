@@ -26,6 +26,7 @@ public class Job implements Serializable {
     private Long id;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private JobStatus jobStatus;
 
     @Column
@@ -35,6 +36,7 @@ public class Job implements Serializable {
     private Integer priority;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private ExecutionMethod executionMethod;
 
     @Column
@@ -46,6 +48,9 @@ public class Job implements Serializable {
 
     @Column
     private LocalDateTime createdDate;
+
+    @Column
+    private String result;
 
     @Override
     public String toString() {

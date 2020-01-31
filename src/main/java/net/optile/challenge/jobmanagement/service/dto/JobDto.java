@@ -41,4 +41,7 @@ public final class JobDto {
 
     @ApiModelProperty(value = "job created date", position = 6)
     private final LocalDateTime createdDate;
+
+    @ApiModelProperty(value = "job result (if provided)", position = 7)
+    private final String result;
 }

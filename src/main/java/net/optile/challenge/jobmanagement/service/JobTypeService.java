@@ -1,5 +1,6 @@
 package net.optile.challenge.jobmanagement.service;
 
+import net.optile.challenge.jobmanagement.job.JobDefinition;
 import net.optile.challenge.jobmanagement.service.dto.JobType;
 
 import java.util.List;
@@ -10,5 +11,7 @@ import java.util.List;
  * Time: 1:02 AM
  **/
 public interface JobTypeService {
-    List<JobType> getAll();
+    List<JobType> getAllJobTypes();
+
+    List<JobDefinition> getAllJobDefinitions();
 }

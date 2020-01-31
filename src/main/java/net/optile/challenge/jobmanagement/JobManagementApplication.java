@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -14,6 +15,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @EnableConfigurationProperties(ApplicationProperties.class)
 @Slf4j
+@EnableScheduling
 public class JobManagementApplication {
 
 
@@ -43,7 +45,7 @@ public class JobManagementApplication {
 						"Application '{}' is running! \t\n Access URLs:\n\t" +
 						"Local: \t\t{}://localhost:{}{}\n\t" +
 						"External: \t{}://{}:{}{}\n\t" +
-						"swagger: \t\t{}://localhost:{}{}swagger-ui.html\n\t" +
+						"Swagger: \t{}://localhost:{}{}swagger-ui.html\n\t" +
 						"Profile(s): \t{}\n----------------------------------------------------------",
 				env.getProperty("spring.application.name"),
 				protocol,
@@ -65,5 +67,7 @@ public class JobManagementApplication {
 		log.info("\n----------------------------------------------------------\n\t" +
 				"Config Server: \t{}\n----------------------------------------------------------", configServerStatus);
 	}
+
+
 
 }

@@ -1,6 +1,5 @@
 server:
   port: 9090
-
 spring:
   application:
     name: job-management
@@ -10,8 +9,17 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: deferred
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    data-username: sa
+    data-password:
+  h2:
+    console:
+      enabled: true
   jpa:
     database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     open-in-view: false
     properties:
@@ -36,17 +44,14 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Tehran
 #      Europe/Berlin
-  mvc:
-    favicon:
-      enabled: false
   task:
     execution:
-      thread-name-prefix: payment-task-
+      thread-name-prefix: job-task-
       pool:
-        core-size: 10
+        core-size: 20
         max-size: 100
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: payment-scheduling-
+      thread-name-prefix: job-scheduling-
       pool:
-        size: 2
+        size: 77

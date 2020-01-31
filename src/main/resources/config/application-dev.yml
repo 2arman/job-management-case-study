@@ -5,5 +5,5 @@ logging:
 
 spring:
   profiles:
-  active: dev
+    active: dev
 

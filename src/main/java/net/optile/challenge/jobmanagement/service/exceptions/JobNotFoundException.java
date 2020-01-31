@@ -1,6 +1,5 @@
 package net.optile.challenge.jobmanagement.service.exceptions;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
@@ -8,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @ToString
 @Getter
-public class JobNotFoundException extends Exception {
+public class JobNotFoundException extends RuntimeException {
     private final Long jobId;
     private final HttpStatus httpStatus = HttpStatus.NOT_FOUND;
     private final String message;

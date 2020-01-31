@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Arman
@@ -16,9 +16,9 @@ import java.util.List;
 @Data
 @Builder
 public final class JobType {
-    @ApiModelProperty(value = "job type name",position = 0)
+    @ApiModelProperty(value = "job type name", position = 0)
     private final String name;
 
-    @ApiModelProperty(value = "job type required parameter",position = 1)
-    private final List<String> requiredParameter;
+    @ApiModelProperty(value = "job type required parameters", position = 1)
+    private final Set<String> parameters;
 }

@@ -3,6 +3,7 @@ package net.optile.challenge.jobmanagement.service.mapper;
 import net.optile.challenge.jobmanagement.domain.ExecutionMethod;
 import net.optile.challenge.jobmanagement.domain.Job;
 import net.optile.challenge.jobmanagement.domain.JobParameter;
+import net.optile.challenge.jobmanagement.domain.JobStatus;
 import net.optile.challenge.jobmanagement.service.dto.JobDto;
 import net.optile.challenge.jobmanagement.service.dto.JobExecutionTypeDto;
 import net.optile.challenge.jobmanagement.service.dto.JobReportResponse;
@@ -25,33 +26,28 @@ import java.util.stream.Collectors;
 @Component
 public abstract class JobMapper {
 
-    public Job map(JobDto jobDto) {
-        return Job.builder()
-                .id(Long.valueOf(jobDto.getJobId()))
-                .createdDate(jobDto.getCreatedDate())
-                .jobType(jobDto.getJobType())
-                .priority(jobDto.getPriority())
-                .parameters(map(jobDto.getParameters()))
-                .executionMethod(map(jobDto.getJobExecutionType().getExecutionMethod()))
-                .executionTime(jobDto.getJobExecutionType().getExecutionTime())
-                .build();
-    }
-
     public Job map(RegisterJobRequest jobDto) {
-        return Job.builder()
+        Job job = Job.builder()
                 .createdDate(LocalDateTime.now())
                 .jobType(jobDto.getJobType())
                 .priority(jobDto.getPriority())
-                .parameters(map(jobDto.getParameters()))
+                .jobStatus(JobStatus.QUEUED)
                 .executionMethod(map(jobDto.getJobExecutionType().getExecutionMethod()))
-                .executionTime(jobDto.getJobExecutionType().getExecutionTime())
+                .executionTime(mapExecutionTime(jobDto.getJobExecutionType().getExecutionTime(), jobDto.getJobExecutionType().getExecutionMethod()))
                 .build();
+        job.setParameters(map(jobDto.getParameters(), job));
+        return job;
+    }
+
+    private LocalDateTime mapExecutionTime(LocalDateTime executionTime, JobExecutionTypeDto.ExecutionMethod executionMethod) {
+        return executionMethod == JobExecutionTypeDto.ExecutionMethod.SCHEDULED ? executionTime : LocalDateTime.now();
     }
 
     public JobDto map(Job job) {
         return JobDto.builder()
                 .jobId(String.valueOf(job.getId()))
                 .createdDate(job.getCreatedDate())
+                .result(job.getResult())
                 .jobType(job.getJobType())
                 .priority(job.getPriority())
                 .parameters(map(job.getParameters()))
@@ -65,17 +61,18 @@ public abstract class JobMapper {
 
     protected abstract JobExecutionTypeDto.ExecutionMethod map(ExecutionMethod executionMethod);
 
-    private Map<String, String> map(List<JobParameter> parameters) {
+    public Map<String, String> map(List<JobParameter> parameters) {
         return parameters.stream().collect(
                 Collectors.toMap(JobParameter::getKey, JobParameter::getValue));
     }
 
     protected abstract ExecutionMethod map(JobExecutionTypeDto.ExecutionMethod executionMethod);
 
-    private List<JobParameter> map(Map<String, String> parameters) {
+    private List<JobParameter> map(Map<String, String> parameters, Job job) {
         return parameters.entrySet()
                 .stream()
                 .map(p -> JobParameter.builder()
+                        .job(job)
                         .key(p.getKey())
                         .value(p.getValue())
                         .build())

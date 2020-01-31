@@ -1,10 +1,12 @@
 package net.optile.challenge.jobmanagement.web.rest;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import net.optile.challenge.jobmanagement.service.JobManagementService;
 import net.optile.challenge.jobmanagement.service.dto.JobDto;
-import net.optile.challenge.jobmanagement.service.dto.JobReportResponse;
 import net.optile.challenge.jobmanagement.service.dto.RegisterJobRequest;
 import net.optile.challenge.jobmanagement.service.dto.RegisterJobResponse;
 import net.optile.challenge.jobmanagement.service.exceptions.JobNotFoundException;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -46,7 +49,7 @@ public class JobController {
             @ApiResponse(code = 404, message = "The Job not found."),
             @ApiResponse(code = 500, message = "Internal server error."),
     })
-    public ResponseEntity<JobDto> getJob(@Valid @PathVariable("jobId") @Pattern(regexp = "\\d+") String jobId)
+    public ResponseEntity<JobDto> getJob(@PathVariable("jobId") @NotBlank @Pattern(regexp = "\\d+") String jobId)
             throws JobNotFoundException {
         return ResponseEntity.ok(jobManagementService.getJob(Long.valueOf(jobId)));
     }
