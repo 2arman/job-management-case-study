@@ -13,7 +13,7 @@ import lombok.Data;
 @ApiModel
 @Data
 @Builder
-public class RegisterJobResponse {
+public final class RegisterJobResponse {
 
     @ApiModelProperty("job registration id")
     private final String jobId;

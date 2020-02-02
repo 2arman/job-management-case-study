@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ApiModel
 @Data
 @Builder
-public class JobExecutionTypeDto {
+public final class JobExecutionTypeDto {
     @ApiModelProperty(value = "execution method", required = true)
     @NotNull
     private final ExecutionMethod executionMethod;

@@ -49,6 +49,7 @@ public abstract class JobMapper {
                 .createdDate(job.getCreatedDate())
                 .result(job.getResult())
                 .jobType(job.getJobType())
+                .jobStatus(map(job.getJobStatus()))
                 .priority(job.getPriority())
                 .parameters(map(job.getParameters()))
                 .jobExecutionType(JobExecutionTypeDto.builder()
@@ -58,6 +59,10 @@ public abstract class JobMapper {
 
                 .build();
     }
+
+    protected abstract net.optile.challenge.jobmanagement.service.dto.JobStatus map(JobStatus jobStatus);
+
+    public abstract JobStatus map(net.optile.challenge.jobmanagement.service.dto.JobStatus jobStatus);
 
     protected abstract JobExecutionTypeDto.ExecutionMethod map(ExecutionMethod executionMethod);
 

@@ -8,5 +8,5 @@ import net.optile.challenge.jobmanagement.domain.Job;
  * Time: 11:28 PM
  **/
 public interface EventPublisher {
-    void publishEvent(Job jobEvent);
+    void publishEvent(Job job);
 }
