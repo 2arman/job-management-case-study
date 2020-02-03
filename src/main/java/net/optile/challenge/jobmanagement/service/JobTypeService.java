@@ -1,6 +1,6 @@
 package net.optile.challenge.jobmanagement.service;
 
-import net.optile.challenge.jobmanagement.job.JobDefinition;
+import net.optile.challenge.job.definition.JobTypeDefinition;
 import net.optile.challenge.jobmanagement.service.dto.JobType;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
 public interface JobTypeService {
     List<JobType> getAllJobTypes();
 
-    List<JobDefinition> getAllJobDefinitions();
+    List<JobTypeDefinition> getAllJobDefinitions();
 
     void validateTypeAndParameters(String jobType, Map<String, String> parameters);
 }

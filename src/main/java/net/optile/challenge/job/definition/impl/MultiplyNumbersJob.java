@@ -1,8 +1,8 @@
-package net.optile.challenge.jobmanagement.job.impl;
+package net.optile.challenge.job.definition.impl;
 
 import com.google.common.collect.ImmutableSet;
 import lombok.extern.slf4j.Slf4j;
-import net.optile.challenge.jobmanagement.job.JobDefinition;
+import net.optile.challenge.job.definition.JobTypeDefinition;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
@@ -14,14 +14,14 @@ import java.util.Set;
  * Time: 8:00 PM
  **/
 @Slf4j
-public class SubtractJobImpl implements JobDefinition {
+public class MultiplyNumbersJob implements JobTypeDefinition {
 
-    public static final String JOB_TYPE = "subtract";
+    public static final String JOB_TYPE = "multiply";
     public static final String OPERAND_1 = "operand1";
     public static final String OPERAND_2 = "operand2";
 
     @Override
-    public String getJobType() {
+    public String getJobTypeName() {
         return JOB_TYPE;
     }
 
@@ -41,8 +41,8 @@ public class SubtractJobImpl implements JobDefinition {
 
     @Override
     public String run(Map<String, String> parameter) {
-        log.info("the {} is running",JOB_TYPE);
+        log.info("the {} is running", JOB_TYPE);
         return String.valueOf((Integer.parseInt(parameter.get(OPERAND_1))
-                - Integer.parseInt(parameter.get(OPERAND_2))));
+                * Integer.parseInt(parameter.get(OPERAND_2))));
     }
 }

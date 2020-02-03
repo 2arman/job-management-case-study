@@ -1,7 +1,7 @@
 package net.optile.challenge.jobmanagement.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import net.optile.challenge.jobmanagement.job.JobDefinition;
+import net.optile.challenge.job.definition.JobTypeDefinition;
 import net.optile.challenge.jobmanagement.service.JobTypeService;
 import net.optile.challenge.jobmanagement.service.dto.JobType;
 import net.optile.challenge.jobmanagement.service.exception.BadRequestException;
@@ -29,33 +29,33 @@ public class JobTypeServiceImpl implements JobTypeService {
     @Override
     public List<JobType> getAllJobTypes() {
         return getAllJobDefinitions().stream()
-                .map(jobDefinition -> JobType.builder()
-                        .name(jobDefinition.getJobType())
-                        .parameters(jobDefinition.getJobParameter())
+                .map(jobTypeDefinition -> JobType.builder()
+                        .name(jobTypeDefinition.getJobTypeName())
+                        .parameters(jobTypeDefinition.getJobParameter())
                         .build())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<JobDefinition> getAllJobDefinitions() {
-        List<JobDefinition> jobDefinitions = new ArrayList<>();
-        Set<Class<? extends JobDefinition>> jobsImplemented = new Reflections(
-                "net.optile", new SubTypesScanner()).getSubTypesOf(JobDefinition.class);
-        for (Class<? extends JobDefinition> jobClass : jobsImplemented) {
+    public List<JobTypeDefinition> getAllJobDefinitions() {
+        List<JobTypeDefinition> jobTypeDefinitions = new ArrayList<>();
+        Set<Class<? extends JobTypeDefinition>> jobsImplemented = new Reflections(
+                "net.optile", new SubTypesScanner()).getSubTypesOf(JobTypeDefinition.class);
+        for (Class<? extends JobTypeDefinition> jobClass : jobsImplemented) {
             try {
-                jobDefinitions.add(jobClass.newInstance());
+                jobTypeDefinitions.add(jobClass.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 log.warn("could not load job jobDefinition {}", jobClass.getName(), e);
             }
         }
-        return jobDefinitions;
+        return jobTypeDefinitions;
     }
 
     @Override
     public void validateTypeAndParameters(@NotNull String jobType, Map<String, String> parameters) {
         boolean validParam = getAllJobDefinitions()
                 .stream()
-                .filter(jobDefinition -> jobDefinition.getJobType().equals(jobType))
+                .filter(jobTypeDefinition -> jobTypeDefinition.getJobTypeName().equals(jobType))
                 .findFirst()
                 .orElseThrow(() -> new JobTypeNotFoundException(jobType))
                 .validate(parameters);

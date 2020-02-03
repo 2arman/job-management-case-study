@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.optile.challenge.jobmanagement.event.EventQueue;
 import net.optile.challenge.jobmanagement.event.JobEvent;
-import net.optile.challenge.jobmanagement.job.JobExecutor;
+import net.optile.challenge.job.executor.JobExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;

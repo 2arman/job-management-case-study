@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"net.optile.challenge"})
 @EnableConfigurationProperties(ApplicationProperties.class)
 @Slf4j
 @EnableScheduling

@@ -1,7 +1,8 @@
-package net.optile.challenge.jobmanagement.job;
+package net.optile.challenge.job.executor;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.optile.challenge.job.definition.JobTypeDefinition;
 import net.optile.challenge.jobmanagement.service.JobReportService;
 import net.optile.challenge.jobmanagement.service.JobStatusManagementService;
 import net.optile.challenge.jobmanagement.service.JobTypeService;
@@ -28,8 +29,8 @@ public class JobExecutor {
     private final JobStatusManagementService jobStatusManagementService;
 
     private String execute(String jobType, Map<String, String> parameters) throws JobTypeNotFoundException {
-        JobDefinition selectedJob = jobTypeService.getAllJobDefinitions().stream()
-                .filter(jobDefinition -> jobType.equals(jobDefinition.getJobType()))
+        JobTypeDefinition selectedJob = jobTypeService.getAllJobDefinitions().stream()
+                .filter(jobTypeDefinition -> jobType.equals(jobTypeDefinition.getJobTypeName()))
                 .findFirst()
                 .orElseThrow(() -> new JobTypeNotFoundException(jobType));
         return selectedJob.run(parameters);
