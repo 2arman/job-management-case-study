@@ -24,9 +24,9 @@ A Job can be executed immediately or according to a schedule.
 
 ### Project Architecture and Design 
 
-![Project Architecture](./src/main/resources/doc/architecture.png)
+![Job Management Architecture](./src/main/resources/job-mng-architecture.jpg)
 
-The project consists of following part/ tech stack 
+The project contains of below modules
 <br/> (can be defines in separate modules):
 * Job Management Service : spring boot service for register and retrieving jobs information.
     * Job Registration
@@ -46,8 +46,7 @@ The project consists of following part/ tech stack
     for support add new job without re develop The Job Management System.
         * pre requirement : create separate  maven module  for JobTypeDefinition
     * provide more unit test and component test for achieve more code coverage and better maintainability.
-    * replace in-memory databases with a no sql databases such as MongoDB for persistent/consistency and better performance.
-    * using Cache system for caching job types 
+    * replace in-memory H2 databases with a transactional sql databases such as MySql that provide persistent/Consistency and durability.
 * Features (suggestion):
     * Implementing Authentication/ Authorization for job registration / report or define new job type
     * Provide an api to declare and register new job type definition 
