@@ -3,11 +3,13 @@ package net.optile.challenge.jobmanagement.service;
 import net.optile.challenge.jobmanagement.service.dto.JobExecutionTypeDto;
 import net.optile.challenge.jobmanagement.service.dto.JobType;
 import net.optile.challenge.jobmanagement.service.dto.RegisterJobRequest;
+import net.optile.challenge.jobmanagement.service.exception.BadRequestException;
 import net.optile.challenge.jobmanagement.service.exception.JobTypeNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.util.Experimental;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Collections;
 
@@ -43,6 +45,24 @@ class JobRegistrationServiceTest {
     }
 
     @Test
+    void registerJob_BadRequestTypeParameter() {
+        assertThrows(BadRequestException.class,
+                () -> {
+                    RegisterJobRequest registerJobRequest =
+                            RegisterJobRequest.builder()
+                                    .jobExecutionType(
+                                            JobExecutionTypeDto.builder()
+                                                    .executionMethod(JobExecutionTypeDto.ExecutionMethod.IMMEDIATE)
+                                                    .build())
+                                    .jobType("echo")
+                                    .parameters(Collections.singletonMap("fault", "test"))
+                                    .priority(0)
+                                    .build();
+                    jobRegistrationService.registerJob(registerJobRequest);
+                });
+    }
+
+    @Test
     void registerJob_Success() {
         RegisterJobRequest registerJobRequest =
                 RegisterJobRequest.builder()
@@ -51,7 +71,7 @@ class JobRegistrationServiceTest {
                                         .executionMethod(JobExecutionTypeDto.ExecutionMethod.IMMEDIATE)
                                         .build())
                         .jobType("echo")
-                        .parameters(Collections.singletonMap("param","test"))
+                        .parameters(Collections.singletonMap("param", "test"))
                         .priority(0)
                         .build();
         assertEquals("1",
