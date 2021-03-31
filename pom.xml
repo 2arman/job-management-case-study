@@ -18,7 +18,7 @@
         <swagger.version>2.8.0</swagger.version>
         <swagger.model.version>1.5.23</swagger.model.version>
         <swagger.annotation.version>1.5.23</swagger.annotation.version>
-        <guava.version>28.2-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
         <java.version>1.8</java.version>
     </properties>
